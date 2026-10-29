@@ -11,11 +11,21 @@ You also have to set if it is a regression task or a classification task.
 After starting the docker server you can query the scoring function with pythons requests.
 You send a SMILES string or a list of SMILES and get a prediction back.
 
+## Installation
+```bash
+# only installs the client dependencies
+# you can query the server
+pip install moltab
+
+# to host a local docker server use the extra dependencies
+pip install "moltab[server]"
+```
 
 ## Usage
 
 Training CSV needs a SMILES column and a target column (numeric for regression, any label for classification).
-Invalid SMILES are dropped, duplicates merged (mean / majority vote). Features are the raw 2048-dim CheMeleon fingerprint.
+Invalid SMILES are dropped, duplicates merged (mean / majority vote).
+Features are the raw 2048-dim CheMeleon fingerprint.
 
 ```bash
 # local
@@ -28,7 +38,8 @@ Settings can also be given as `MOLTAB_*` env vars (`DATA_PATH`, `TASK`, `SMILES_
 
 ```python
 from moltab.client import MoltabClient
-c = MoltabClient("http://localhost:8000")
+
+c = MoltabClient("http://localhost:8000") # default adress of the local server
 c.score("CCO")                 # -> float
 c.score(["CCO", "c1ccccc1"])   # -> list, None for invalid SMILES
 c.score_full(["CCO"])          # -> dicts incl. label/probabilities for classification

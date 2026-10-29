@@ -4,9 +4,9 @@ ENV UV_PYTHON_INSTALL_DIR=/opt/python UV_LINK_MODE=copy UV_COMPILE_BYTECODE=1 \
     HOME=/home/moltab PATH=/app/.venv/bin:$PATH
 WORKDIR /app
 COPY pyproject.toml uv.lock .python-version README.md ./
-RUN uv sync --frozen --no-dev --no-install-project
+RUN uv sync --frozen --no-dev --extra server --no-install-project
 COPY src ./src
-RUN uv sync --frozen --no-dev
+RUN uv sync --frozen --no-dev --extra server
 # Pre-download weights so the container runs offline.
 RUN mkdir -p $HOME && python -c "\
 from moltab.featurizer import CheMeleonFeaturizer; CheMeleonFeaturizer(device='cpu'); \

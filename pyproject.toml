@@ -6,17 +6,36 @@ readme = "README.md"
 authors = [
     { name = "MalteGrieswelle", email = "m.grieswelle@outlook.de" }
 ]
-requires-python = ">=3.13"
+license = { file = "LICENSE" }
+classifiers = [
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Topic :: Scientific/Engineering :: Cheminformatics",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+keywords = [
+    "drug discovery", 
+    "cheminformatics",
+    "medicinal chemistry",
+    "computational chemistry",
+    "machine learning",
+    "scoring function",
+    ]
+requires-python = ">=3.11"
 dependencies = [
+    "pydantic>=2",
+    "pydantic-settings>=2",
+    "requests",
+]
+
+[project.optional-dependencies]
+server = [
     "chemprop>=2.2.0",
     "fastapi>=0.115",
     "numpy",
     "pandas",
-    "pydantic>=2",
-    "pydantic-settings>=2",
-    "requests",
     "rdkit",
     "scikit-learn",
+    "scipy",
     "tabicl>=2",
     "torch",
     "uvicorn>=0.30",
@@ -27,6 +46,7 @@ moltab = "moltab.cli:main"
 
 [dependency-groups]
 dev = [
+    "moltab[server]",
     "httpx",
     "matplotlib>=3.11.2",
     "pytest",
