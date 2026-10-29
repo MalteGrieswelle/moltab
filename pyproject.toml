@@ -9,7 +9,6 @@ authors = [
 license = { file = "LICENSE" }
 classifiers = [
     "Topic :: Scientific/Engineering :: Chemistry",
-    "Topic :: Scientific/Engineering :: Cheminformatics",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 keywords = [
