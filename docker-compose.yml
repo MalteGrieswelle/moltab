@@ -1,0 +1,16 @@
+services:
+  moltab:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports: ["8000:8000"]
+    volumes: ["./data:/data:ro"]
+    environment:
+      MOLTAB_DATA_PATH: /data/train.csv
+      MOLTAB_TASK: regression        # or classification
+      MOLTAB_SMILES_COL: smiles
+      MOLTAB_TARGET_COL: target
+    deploy:
+      resources:
+        reservations:
+          devices: [{driver: nvidia, count: 1, capabilities: [gpu]}]

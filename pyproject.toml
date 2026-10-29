@@ -1,0 +1,47 @@
+[project]
+name = "moltab"
+version = "0.1.0"
+description = "Scoring function: CheMeleon fingerprints + TabICLv2 in-context learning behind a REST API"
+readme = "README.md"
+authors = [
+    { name = "MalteGrieswelle", email = "m.grieswelle@outlook.de" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "chemprop>=2.2.0",
+    "fastapi>=0.115",
+    "numpy",
+    "pandas",
+    "pydantic>=2",
+    "pydantic-settings>=2",
+    "requests",
+    "rdkit",
+    "scikit-learn",
+    "tabicl>=2",
+    "torch",
+    "uvicorn>=0.30",
+]
+
+[project.scripts]
+moltab = "moltab.cli:main"
+
+[dependency-groups]
+dev = [
+    "httpx",
+    "matplotlib>=3.11.2",
+    "pytest",
+    "pytest-cov",
+    "ruff",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.17,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-m 'not slow'"
+markers = ["slow: needs real model weights / network (run with -m slow)"]
+
+[tool.ruff]
+line-length = 100
